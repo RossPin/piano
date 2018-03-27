@@ -1,23 +1,27 @@
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init);
 
-var synth = new Tone.AMSynth().toMaster()
+var synth = new Tone.AMSynth().toMaster();
 
 function init() {    
-  document.addEventListener('keydown', keyHandler)
-  document.addEventListener('keyup', stop)
+  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('keyup', stop);
 }
 
 function play(tone) {
-  synth.triggerAttack(tone)
+  synth.triggerAttack(tone);
 }
 
 function stop() {
-  synth.triggerRelease()
+  synth.triggerRelease();
+  unSelectKeys();
 }
 
 function keyHandler(evt) {    
   var note = getNote(evt.keyCode);
-  if (note !== undefined) play(note)
+  if (note !== undefined) { 
+    play(note);
+    selectKey(note);
+  }
 }
 
 function getNote (key){
@@ -37,6 +41,17 @@ function getNote (key){
   else if (key === 79) return 'C#4';
   else if (key === 76) return 'D4';
   else if (key === 80) return 'D#4';
-  else if (key === 186) return 'E4';
-  else if (key === 222) return 'F4';  
+  else if (key === 186) return 'E4';   
+}
+
+function selectKey(key) {
+  var selectedKey = document.getElementById(key);
+  selectedKey.classList.add('selected');
+}
+
+function unSelectKeys () {
+  var keys = document.getElementsByClassName('selected');
+  for (var i=0; i < keys.length; i++) {
+    keys[i].classList.remove('selected')
+  }
 }
