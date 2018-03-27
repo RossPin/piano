@@ -1,5 +1,10 @@
 body {
   text-align: center;
+  /*Prevent text selection*/
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */   
+    -ms-user-select: none; /* IE10+ */
+    user-select: none;
 }
 .container {
   max-width: 700px;    
@@ -11,7 +16,8 @@ body {
 
 .key {
   position: relative;
-  float: left;  
+  float: left; 
+  /*make border width included in key size*/ 
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
@@ -52,12 +58,12 @@ body {
   background-color: #aaa;
  }
 
+/*center container verticaly if page is higher than 350px*/ 
 @media (min-height: 350px){
-.container {
-  margin-top: calc((100vh - 349px) / 2);
+  .container {
+    margin-top: calc((100vh - 349px) / 2);
+  }
 }
- }
-
 
 .container:before,
 .container:after {
