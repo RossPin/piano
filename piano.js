@@ -2,9 +2,14 @@ document.addEventListener('DOMContentLoaded', init);
 
 var synth = new Tone.AMSynth().toMaster();
 
-function init() {    
+function init() {   
+  var keys = document.getElementsByClassName('key');
+  for (var i=0; i <keys.length; i++) {
+    keys[i].addEventListener('mousedown', mouseHandler)
+  } 
   document.addEventListener('keydown', keyHandler);
-  document.addEventListener('keyup', stop);
+  document.addEventListener('keyup', stop); 
+  document.addEventListener('mouseup', stop); 
 }
 
 function play(tone) {
@@ -22,6 +27,13 @@ function keyHandler(evt) {
     play(note);
     selectKey(note);
   }
+}
+
+function mouseHandler(evt) {    
+  var note = evt.target.id;
+  play(note);
+  selectKey(note);
+
 }
 
 function getNote (key){
@@ -52,6 +64,6 @@ function selectKey(key) {
 function unSelectKeys () {
   var keys = document.getElementsByClassName('selected');
   for (var i=0; i < keys.length; i++) {
-    keys[i].classList.remove('selected')
+    keys[i].classList.remove('selected');
   }
 }
